@@ -1,6 +1,7 @@
 // NPM Libaries
 const express = require("express");
 const dns = require("dns");
+const os = require("os");
 const validator = require('validator');
 const axios = require('axios');
 const cors = require("cors");
@@ -49,7 +50,6 @@ app.get("/Mobile", (req, res) => {
   res.sendFile(`${__dirname}/../Frontend/Frontend/MoblieIndex.html`);
 });
 
-
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
@@ -68,6 +68,8 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   }
 
   //DNS check
+  const checkIP = os.networkInterfaces()
+  console.log(checkIP);
   const oldURLhostname = new URL(oldURL).hostname;
   try {
     await new Promise((res, rej) => {
