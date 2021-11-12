@@ -1,5 +1,6 @@
 // NPM Libaries
 const express = require("express");
+const dns = require("dns");
 const validator = require('validator');
 const axios = require('axios');
 const cors = require("cors");
@@ -32,7 +33,7 @@ app.use("/", (req, res, next) => {
   } else {
     next();
   }
-})
+});
 
 app.use(express.static(`${__dirname}/../../Assest`));
 app.use("/error/404", express.static(`${__dirname}/../Frontend`, { index: 'notfound.html' }));
@@ -52,18 +53,30 @@ app.get("/Mobile", (req, res) => {
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
+
   if (!validator.isURL(oldURL)) { // Double Check Arguments
     next({ status: 401, msg: "Go Away" });
     return
   }
-  if (!validator.isLength(newUrl, { min: 3, max: 15 })) {
+  if (/egshorturl.heroku/.test(oldURL)) {
+    next({ status: 401, msg: "Cant Use This URL" });
+    return;
+  }
+  if (!validator.isLength(newUrl, { min: 3, max: 15 }) || !validator.isAlphanumeric(newUrl)) {
     next({ status: 401, msg: "Go Away" });
     return
   }
-  if (!validator.isAlphanumeric(newUrl)) {
-    next({ status: 401, msg: "Go Away" });
-    return
-  }
+
+  //DNS check
+  const dnsHttpRegex = /^http[s]{0,1}:\/\//;
+  const dnsPathregex = /\/.*/
+  const oldUrlDNS = oldURL.replace(dnsHttpRegex, "").replace(dnsPathregex, "");
+  dns.lookup(oldUrlDNS, (err, address, family) => {
+    if (err) {
+      next({ status: 400, msg: "Provide URL does not Working" })
+    }
+  });
+
   const today = new Date();
   const UrlObj = {
     creationDate: today.toISOString().substring(0, 10),
