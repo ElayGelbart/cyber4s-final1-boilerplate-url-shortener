@@ -85,7 +85,6 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
     next({ status: 400, msg: "Provide URL does not Working" });
     return;
   }
-  console.log("iam after");
   const today = new Date();
   const UrlObj = {
     creationDate: today.toISOString().substring(0, 10),
