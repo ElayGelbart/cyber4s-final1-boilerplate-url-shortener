@@ -71,13 +71,21 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const dnsHttpRegex = /^http[s]{0,1}:\/\//;
   const dnsPathregex = /\/.*/
   const oldUrlDNS = oldURL.replace(dnsHttpRegex, "").replace(dnsPathregex, "");
-  dns.lookup(oldUrlDNS, (err, address, family) => {
-    if (err) {
-      next({ status: 400, msg: "Provide URL does not Working" });
-      return;
-    }
-  });
-
+  try {
+    await new Promise((res, rej) => {
+      dns.lookup(oldUrlDNS, (err, address, family) => {
+        if (err) {
+          rej(err)
+          return;
+        }
+        res(address);
+      })
+    });
+  } catch (err) {
+    next({ status: 400, msg: "Provide URL does not Working" });
+    return;
+  }
+  console.log("iam after");
   const today = new Date();
   const UrlObj = {
     creationDate: today.toISOString().substring(0, 10),
