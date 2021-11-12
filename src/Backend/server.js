@@ -73,7 +73,8 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldUrlDNS = oldURL.replace(dnsHttpRegex, "").replace(dnsPathregex, "");
   dns.lookup(oldUrlDNS, (err, address, family) => {
     if (err) {
-      next({ status: 400, msg: "Provide URL does not Working" })
+      next({ status: 400, msg: "Provide URL does not Working" });
+      return;
     }
   });
 
