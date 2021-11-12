@@ -68,12 +68,10 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   }
 
   //DNS check
-  const dnsHttpRegex = /^http[s]{0,1}:\/\//;
-  const dnsPathregex = /\/.*/
-  const oldUrlDNS = oldURL.replace(dnsHttpRegex, "").replace(dnsPathregex, "");
+  const oldURLhostname = new URL(oldURL).hostname;
   try {
     await new Promise((res, rej) => {
-      dns.lookup(oldUrlDNS, (err, address, family) => {
+      dns.lookup(oldURLhostname, (err, address, family) => {
         if (err) {
           rej(err)
           return;
