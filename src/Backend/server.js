@@ -53,7 +53,8 @@ app.get("/Mobile", (req, res) => {
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
-
+  const check = req.socket.localAddress;
+  console.log("the check socket", check);
   if (!validator.isURL(oldURL)) { // Double Check Arguments
     next({ status: 401, msg: "Go Away" });
     return
@@ -193,4 +194,8 @@ app.use((err, req, res, next) => {
 const server = app.listen(process.env.PORT || 8080, () => {
   console.log("server is on");
   console.log("server adress", server.address());
+  console.log("server cpnnections", server.getConnections());
+  var interfaces = os.networkInterfaces();
+  console.log("sof way", interfaces);
+
 })
