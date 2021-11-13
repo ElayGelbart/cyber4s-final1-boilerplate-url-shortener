@@ -192,6 +192,5 @@ app.use((err, req, res, next) => {
 
 const server = app.listen(process.env.PORT || 8080, () => {
   console.log("server is on");
+  console.log("server adress", server.address());
 })
-
-console.log(server.address());
