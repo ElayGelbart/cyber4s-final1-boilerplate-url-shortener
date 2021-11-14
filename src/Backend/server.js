@@ -7,7 +7,7 @@ const readirectRouter = require("./Routers/redirect");
 const generalErrorHandler = require("./ErrorHandlers/generalHandler");
 
 //for DEV
-process.env.API_SECRET_KEY = process.argv[2];
+// process.env.API_SECRET_KEY = process.argv[2];
 
 const app = express();
 app.use(cors());
