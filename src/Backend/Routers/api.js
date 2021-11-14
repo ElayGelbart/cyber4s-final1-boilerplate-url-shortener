@@ -41,7 +41,7 @@ router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
       }
     });
     const EGShortURLOBJ = getResponse.data.record;
-    if (EGShortURLOBJ[newUrl] == undefined) {
+    if (EGShortURLOBJ[newUrl]) {
       next({ status: 401, msg: "New URL Taken" })
       return;
     }
