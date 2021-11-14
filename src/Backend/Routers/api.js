@@ -23,7 +23,9 @@ router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
   //DNS check
   const oldURLhostname = new URL(oldURL).hostname;
   try {
-    helpFunctions.dnsLookup4URL(oldURLhostname);
+    helpFunctions.dnsLookup4URL(oldURLhostname).catch(err => {
+      throw new Error(err);
+    });
   } catch (err) {
     next({ status: 400, msg: "Provide URL does not Working" });
     return;
