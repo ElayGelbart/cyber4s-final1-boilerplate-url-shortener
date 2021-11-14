@@ -1,13 +1,18 @@
 // NPM Libaries
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 // My Files 
 const apiRouter = require("./Routers/api");
+const usersRouter = require("./Routers/users");
 const readirectRouter = require("./Routers/redirect");
 const generalErrorHandler = require("./ErrorHandlers/generalHandler");
 
 //for DEV
-process.env.API_SECRET_KEY = process.argv[2]; // remeber this 
+process.env.MONGO_SECRET_KEY = process.argv[2]; // remeber this 
+const mongopassword = process.env.MONGO_SECRET_KEY;
+
+mongoose.connect(`mongodb+srv://elaygelbart:${mongopassword}@elaygelbart.qhmbq.mongodb.net/EGShortURL?retryWrites=true&w=majority`)
 
 const app = express();
 app.use(cors());
@@ -29,6 +34,7 @@ app.get("/Mobile", (req, res) => {
 });
 
 app.use("/api", apiRouter);
+app.use("/users", usersRouter)
 app.use("/", readirectRouter);
 
 // Error Handler

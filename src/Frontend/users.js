@@ -19,7 +19,7 @@ const signupToWebsite = () => {
     return
   }
   try {
-    const response = await axios.post(`${Host}/signup/newuser`, { username: usernameValue, password: passwordValue });
+    const response = await axios.post(`${Host}/users/signup`, { username: usernameValue, password: passwordValue });
     clearBadInput();
   } catch (err) {
     createErrorInputUI(document.getElementById("signupUsernameInput"), "Username Taken");
