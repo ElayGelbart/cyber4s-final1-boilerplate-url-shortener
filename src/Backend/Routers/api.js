@@ -23,7 +23,7 @@ router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
   //DNS check
   const oldURLhostname = new URL(oldURL).hostname;
   try {
-    helpFunctions.dnsLookup4URL(oldURLhostname).catch(err => {
+    await helpFunctions.dnsLookup4URL(oldURLhostname).catch(err => {
       throw new Error(err);
     });
   } catch (err) {
