@@ -26,7 +26,7 @@ router.post("/login", async (req, res, next) => {
   const userPassword = helpFunctions.cryptoPassword(req.body.password);
   try {
     const checkUserName = await UserModel.find({ username: userName });
-    if (checkUserName.password == undefined || checkUserName.password != userPassword) {
+    if (checkUserName[0].password == undefined || checkUserName[0].password != userPassword) {
       next({ status: 400, msg: "Auth Failed" });
       return
     }

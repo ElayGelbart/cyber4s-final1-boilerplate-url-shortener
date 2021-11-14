@@ -24,4 +24,17 @@ const signupToWebsite = async () => {
   }
 };
 
+const loginToWebsite = async () => {
+  const usernameValue = document.getElementById("loginUsernameInput").value;
+  const passwordValue = document.getElementById("loginPasswordInput").value;
+  try {
+    const response = await axios.post(`${Host}/users/login`, { username: usernameValue, password: passwordValue });
+    clearBadInput();
+    alert("logged")
+  } catch (err) {
+    createErrorInputUI(document.getElementById("loginPasswordInput"), "Failed");
+  }
+}
+
 document.getElementById("signupBtn").addEventListener("click", signupToWebsite);
+document.getElementById("loginBtn").addEventListener("click", loginToWebsite);
