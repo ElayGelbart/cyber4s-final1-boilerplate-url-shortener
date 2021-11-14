@@ -4,7 +4,8 @@ const dnsLookup4URL = async (givenURL) => {
   await new Promise((res, rej) => {
     dns.lookup(givenURL, (err, address, family) => {
       if (err) {
-        throw rej(err);
+        rej(err);
+        return;
       }
       res(address);
     })
