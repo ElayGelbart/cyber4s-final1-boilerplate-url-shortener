@@ -1,8 +1,6 @@
 'use strict'
-// const Host = `https://egshorturl.herokuapp.com`;
-const Host = `http://localhost:8080`;
 
-const signupToWebsite = () => {
+const signupToWebsite = async () => {
   const usernameValue = document.getElementById("signupUsernameInput").value;
   const passwordValue = document.getElementById("signupPasswordInput").value;
   const rePasswordValue = document.getElementById("signupRePasswordInput").value;
@@ -10,7 +8,7 @@ const signupToWebsite = () => {
     createErrorInputUI(document.getElementById("signupRePasswordInput"), "Passwords don't match");
     return
   }
-  if (!validator.isLength(usernameValue, { min: 3, max: 15 }) || !validator.isAlphanumeric(newURLvalue)) {
+  if (!validator.isLength(usernameValue, { min: 3, max: 15 }) || !validator.isAlphanumeric(usernameValue)) {
     createErrorInputUI(document.getElementById("signupUsernameInput"), "Username invalid");
     return
   }
@@ -24,4 +22,6 @@ const signupToWebsite = () => {
   } catch (err) {
     createErrorInputUI(document.getElementById("signupUsernameInput"), "Username Taken");
   }
-}
+};
+
+document.getElementById("signupBtn").addEventListener("click", signupToWebsite);

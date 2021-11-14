@@ -12,7 +12,9 @@ const generalErrorHandler = require("./ErrorHandlers/generalHandler");
 process.env.MONGO_SECRET_KEY = process.argv[2]; // remeber this 
 const mongopassword = process.env.MONGO_SECRET_KEY;
 
-mongoose.connect(`mongodb+srv://elaygelbart:${mongopassword}@elaygelbart.qhmbq.mongodb.net/EGShortURL?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://elaygelbart:${mongopassword}@elaygelbart.qhmbq.mongodb.net/EGShortURL?retryWrites=true&w=majority`).then(() => {
+  console.log("MongoDB connected");
+})
 
 const app = express();
 app.use(cors());

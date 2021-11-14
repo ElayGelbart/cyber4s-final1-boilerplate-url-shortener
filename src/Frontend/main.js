@@ -1,5 +1,6 @@
 'use strict'
-const Host = `https://egshorturl.herokuapp.com`;
+// const Host = `https://egshorturl.herokuapp.com` remember!;
+const Host = `http://localhost:8080`
 
 const sendOldURLToServerWithNameOfNew = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;

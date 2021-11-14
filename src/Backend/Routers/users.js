@@ -4,8 +4,10 @@ const UserModel = require("../Models/User");
 const router = express.Router();
 
 router.post("/signup", async (req, res, next) => {
+  console.log("here signup");
   const userName = req.body.username;
   const userPassword = req.body.password;
+  console.log(userName, userPassword, "user!");
   try {
     const checkUserName = await UserModel.find({ username: userName });
     console.log(checkUserName);
