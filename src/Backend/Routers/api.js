@@ -7,7 +7,6 @@ const router = express.Router();
 router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
-  console.log("the check socket", check);
   if (!validator.isURL(oldURL)) { // Double Check Arguments
     next({ status: 401, msg: "Go Away" });
     return
