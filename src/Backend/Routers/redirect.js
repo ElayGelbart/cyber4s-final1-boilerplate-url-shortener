@@ -1,35 +1,21 @@
 const express = require("express");
-const axios = require('axios');
-
+const UrlModel = require("../Models/URL");
 const router = express.Router();
 
 router.get("/:wishUrl", async (req, res, next) => {
   try {
     const givenUrl = req.params.wishUrl;
-    const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": process.env.API_SECRET_KEY,
-      }
-    });
-    const EGShortURLOBJ = getResponse.data.record;
-    for (let value in EGShortURLOBJ) {
-      if (value == givenUrl) {
-        const redirectUrl = EGShortURLOBJ[value].originalUrl;
-        EGShortURLOBJ[value].redirectCount++;
-        // async because its only counter and user not rely on response
-        const putResponse = axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
-          headers: {
-            "Content-Type": "application/json",
-            "X-Master-Key": process.env.API_SECRET_KEY,
-          }
-        });
-        res.redirect(redirectUrl);
-        return;
-      }
+    const urlObj = await UrlModel.find({ newUrl: givenUrl });
+    if (!urlObj.length) {
+      res.redirect('/error/404');
+      return
     }
-    res.redirect('/error/404');
-    return
+    const upCount = urlObj[0].redirectCount++;
+    // async because its only counter and user not rely on response
+    const putResponse = UrlModel.updateMany({ newUrl: givenUrl }, { $set: { redirectCount: upCount } });
+    res.redirect(urlObj[0].originalUrl);
+    return;
+
   } catch (err) {
     res.redirect('/error/404');
     return

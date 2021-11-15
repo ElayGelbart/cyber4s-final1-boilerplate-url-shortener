@@ -1,10 +1,22 @@
 const express = require("express");
 const validator = require('validator');
-const axios = require('axios');
+
 const helpFunctions = require("../helpFunc/helpFunctions")
+const jwt = require("jsonwebtoken");
+const UrlModel = require("../Models/URL");
+
 const router = express.Router();
+const jwtSecretKey = process.env.JWT_SECRET_KEY || process.argv[3]; // remember this change
 
 router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
+  const token = req.cookies.token;
+  const username = jwt.verify(token, jwtSecretKey, (err, user) => {
+    if (err) {
+      next({ status: 401, msg: "Go Away" });
+      return;
+    }
+    return user.username
+  });
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
   if (!validator.isURL(oldURL)) { // Double Check Arguments
@@ -31,53 +43,40 @@ router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
     return;
   }
   const UrlObj = {
+    username: username,
     creationDate: new Date().toISOString().substring(0, 10),
     redirectCount: 1,
     originalUrl: oldURL,
+    newUrl: newUrl
   };
   try {
-    const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": process.env.API_SECRET_KEY,
-      }
-    });
-    const EGShortURLOBJ = getResponse.data.record;
-    if (EGShortURLOBJ[newUrl]) {
+    const nameOfURLFound = await UrlModel.find({ newUrl: newUrl });
+    if (nameOfURLFound.length) {
       next({ status: 401, msg: "New URL Taken" })
       return;
     }
-    EGShortURLOBJ[newUrl] = UrlObj;
-    const putResponse = await axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": process.env.API_SECRET_KEY,
-      }
-    });
+    const respond = await UrlModel.insertMany(UrlObj)
     res.send(`${newUrl}`); // To Show In Frontend
   } catch (err) {
     next(err)
   }
 });
 
-router.get("/statistic/:shorturl", async (req, res, next) => {
+router.get("/statistic/", async (req, res, next) => {
   try {
-    const givenUrl = req.params.shorturl;
-    const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": process.env.API_SECRET_KEY,
-      }
-    });
-    const EGShortURLOBJ = getResponse.data.record;
-    for (let value in EGShortURLOBJ) {
-      if (value == givenUrl) {
-        const urlObj = EGShortURLOBJ[value];
-        res.send(urlObj);
+    const username = jwt.verify(token, jwtSecretKey, (err, user) => {
+      if (err) {
+        next({ status: 401, msg: "Go Away" });
         return;
       }
+      return user.username
+    });
+    const UrlOfUsername = await UrlModel.find({ username: username })
+    if (UrlOfUsername.length) {
+      res.send(UrlOfUsername)
+      return;
     }
-    next({ status: 404, msg: "URL NOT FOUND" });
+    next({ status: 404, msg: "User Dont have URL" });
   } catch (err) {
     console.log("in error");
     next(err);
