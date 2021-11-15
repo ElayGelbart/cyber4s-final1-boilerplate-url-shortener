@@ -25,6 +25,7 @@ router.post("/signup", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   console.log("in login");
   const userName = req.body.username;
+  console.log("here?");
   const userPassword = helpFunctions.cryptoPassword(req.body.password);
   try {
     const checkUserName = await UserModel.find({ username: userName });
@@ -35,7 +36,10 @@ router.post("/login", async (req, res, next) => {
     const token = jwt.sign({ username: userName }, jwtSecretKey, { expiresIn: "1h" });
     res.cookie("token", token, { maxAge: 9000000 });
     console.log("cookie saved");
-    res.redirect("../..")
+    console.log(req.hostname);
+    console.log(req.originalUrl)
+    console.log(req.url);
+    res.send({ href: "/" });
     return
   } catch (err) {
     next(err)

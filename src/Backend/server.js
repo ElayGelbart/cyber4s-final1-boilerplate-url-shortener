@@ -26,15 +26,19 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(cookieParser());
 
 app.use(express.static(`${__dirname}/../../Assest`));
+
 app.use("/", express.static(`${__dirname}/../Frontend`, { index: false }));
+
 app.get("/", checkAuth, (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/../Frontend/index.html`));
   return
 });
+
 app.get("/login", loginAuthRedirect, (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/../Frontend/auth.html`));
   return
 });
+
 app.get("/error/404", (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/../Frontend/notfound.html`));
   return

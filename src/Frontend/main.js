@@ -80,6 +80,10 @@ const createErrorInputUI = (inputElement, msg) => {
 try {
   document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
   document.getElementById("getStatsticBtn").addEventListener("click", getStatisticFromURL);
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    document.cookie = `token=;Max-Age=-99999999;`;
+    location.reload();
+  })
 
 
 

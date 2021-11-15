@@ -30,7 +30,7 @@ const loginToWebsite = async () => {
   try {
     const response = await axios.post(`${Host}/users/login`, { username: usernameValue, password: passwordValue });
     clearBadInput();
-    alert("logged")
+    window.location.href = '/';
   } catch (err) {
     createErrorInputUI(document.getElementById("loginPasswordInput"), "Failed");
   }
