@@ -26,12 +26,18 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(cookieParser());
 
 app.use(express.static(`${__dirname}/../../Assest`));
-app.use("/", express.static(`${__dirname}/../Frontend`));
-app.get("/login", loginAuthRedirect, (req, res, next) => {
-  res.sendFile(path.resolve(`${__dirname}/../Frontend/auth.html`));
+app.use("/", express.static(`${__dirname}/../Frontend`, { index: false }));
+app.get("/", checkAuth, (req, res) => {
+  res.sendFile(path.resolve(`${__dirname}/../Frontend/index.html`));
+  return
 });
-app.get("/error/404", (req, res, next) => {
+app.get("/login", loginAuthRedirect, (req, res) => {
+  res.sendFile(path.resolve(`${__dirname}/../Frontend/auth.html`));
+  return
+});
+app.get("/error/404", (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/../Frontend/notfound.html`));
+  return
 });
 
 app.use("/api", apiRouter);
@@ -48,7 +54,6 @@ const server = app.listen(process.env.PORT || 8080, () => {
 
 function checkAuth(req, res, next) {
   const token = req.cookies.token;
-  console.log(token, "index token");
   if (!token) { return res.redirect("/login") }
   jwt.verify(token, jwtSecretKey, (err, user) => {
     if (err) {
@@ -63,7 +68,6 @@ function checkAuth(req, res, next) {
 
 function loginAuthRedirect(req, res, next) {
   const token = req.cookies.token;
-  console.log(token);
   if (!token) {
     next();
     return;
