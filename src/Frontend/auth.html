@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/Images/urlLogo.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <title>EGShortURL</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+  <script src="./main.js" defer></script>
+  <script src="./users.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <img src="/Images/Logo.svg">
+  </header>
+  <main>
+    <div id="LoginContainer">
+      <div class="regularDiv" id="LoginDiv">
+        <h2>Login To EGShortURL</h2>
+        <p>UserName <input id="loginUsernameInput" type="text" placeholder="User Name"></p>
+        <p>Password <input id="loginPasswordInput" type="password" placeholder="******"></p>
+        <button class="regularBtn" id="loginBtn">Login</button>
+      </div>
+      <div id="SignupDiv">
+        <div class="regularDiv" id="signUpDiv">
+          <h2>SignUp To EGShortURL</h2>
+          <p>UserName <input id="signupUsernameInput" type="text" placeholder="User Name"></p>
+          <p>Password <input id="signupPasswordInput" type="password" placeholder="******"></p>
+          <p>Re Enter Password <input id="signupRePasswordInput" type="password" placeholder="******"></p>
+          <button class="regularBtn" id="signupBtn">SignUp</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

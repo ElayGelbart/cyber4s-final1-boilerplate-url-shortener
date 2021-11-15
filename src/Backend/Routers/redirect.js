@@ -3,29 +3,6 @@ const axios = require('axios');
 
 const router = express.Router();
 
-router.use("/", (req, res, next) => {
-  if (req.url == "/") { // Mobile Check
-    const toMatch = [
-      /Android/i,
-      /webOS/i,
-      /iPhone/i,
-      /iPad/i,
-      /iPod/i,
-      /BlackBerry/i,
-      /Windows Phone/i
-    ];
-    for (let device of toMatch) {
-      if (device.test(req.headers['user-agent'])) {
-        res.redirect("/Mobile");
-        return;
-      }
-    };
-    next();
-  } else {
-    next();
-  }
-});
-
 router.get("/:wishUrl", async (req, res, next) => {
   try {
     const givenUrl = req.params.wishUrl;

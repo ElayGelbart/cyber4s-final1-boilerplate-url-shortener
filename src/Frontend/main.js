@@ -77,35 +77,40 @@ const createErrorInputUI = (inputElement, msg) => {
   inputElement.parentElement.appendChild(msgPara)
 }
 
-document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
-document.getElementById("getStatsticBtn").addEventListener("click", getStatisticFromURL);
+try {
+  document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
+  document.getElementById("getStatsticBtn").addEventListener("click", getStatisticFromURL);
 
 
 
 
 
-///style
-document.getElementById("getUrlLink").addEventListener("click", () => {
-  document.getElementById("getUrlSect").style.left = "0%"
-  document.getElementById("getUrlLink").classList.add("active");
-  document.getElementById("urlStaticSect").style.left = "100%"
-  document.getElementById("getStatsLink").classList.remove("active")
-  document.getElementById("aboutSect").style.left = "200%"
-  document.getElementById("aboutLink").classList.remove("active")
-});
-document.getElementById("getStatsLink").addEventListener("click", () => {
-  document.getElementById("getUrlSect").style.left = "-100%"
-  document.getElementById("getUrlLink").classList.remove("active")
-  document.getElementById("urlStaticSect").style.left = "0%"
-  document.getElementById("getStatsLink").classList.add("active")
-  document.getElementById("aboutSect").style.left = "100%"
-  document.getElementById("aboutLink").classList.remove("active")
-});
-document.getElementById("aboutLink").addEventListener("click", () => {
-  document.getElementById("getUrlSect").style.left = "-200%"
-  document.getElementById("getUrlLink").classList.remove("active");
-  document.getElementById("urlStaticSect").style.left = "-100%"
-  document.getElementById("getStatsLink").classList.remove("active")
-  document.getElementById("aboutSect").style.left = "0%"
-  document.getElementById("aboutLink").classList.add("active");
-});
+  ///style
+  document.getElementById("getUrlLink").addEventListener("click", () => {
+    document.getElementById("getUrlSect").style.left = "0%"
+    document.getElementById("getUrlLink").classList.add("active");
+    document.getElementById("urlStaticSect").style.left = "100%"
+    document.getElementById("getStatsLink").classList.remove("active")
+    document.getElementById("aboutSect").style.left = "200%"
+    document.getElementById("aboutLink").classList.remove("active")
+  });
+  document.getElementById("getStatsLink").addEventListener("click", () => {
+    document.getElementById("getUrlSect").style.left = "-100%"
+    document.getElementById("getUrlLink").classList.remove("active")
+    document.getElementById("urlStaticSect").style.left = "0%"
+    document.getElementById("getStatsLink").classList.add("active")
+    document.getElementById("aboutSect").style.left = "100%"
+    document.getElementById("aboutLink").classList.remove("active")
+  });
+  document.getElementById("aboutLink").addEventListener("click", () => {
+    document.getElementById("getUrlSect").style.left = "-200%"
+    document.getElementById("getUrlLink").classList.remove("active");
+    document.getElementById("urlStaticSect").style.left = "-100%"
+    document.getElementById("getStatsLink").classList.remove("active")
+    document.getElementById("aboutSect").style.left = "0%"
+    document.getElementById("aboutLink").classList.add("active");
+  });
+
+} catch (err) {
+
+}
