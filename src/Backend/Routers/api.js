@@ -64,6 +64,7 @@ router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
 
 router.get("/statistic/", async (req, res, next) => {
   try {
+    const token = req.cookies.token;
     const username = jwt.verify(token, jwtSecretKey, (err, user) => {
       if (err) {
         next({ status: 401, msg: "Go Away" });
@@ -77,6 +78,20 @@ router.get("/statistic/", async (req, res, next) => {
       return;
     }
     next({ status: 404, msg: "User Dont have URL" });
+  } catch (err) {
+    console.log("in error");
+    next(err);
+  }
+});
+router.get("/statistic/url/:urlName", async (req, res, next) => {
+  try {
+    const givenUrl = req.params.urlName
+    const UrlObj = await UrlModel.find({ newUrl: givenUrl })
+    if (UrlObj.length) {
+      res.send(UrlObj[0])
+      return;
+    }
+    next({ status: 404, msg: "URL NOT FOUND" });
   } catch (err) {
     console.log("in error");
     next(err);

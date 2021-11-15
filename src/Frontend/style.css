@@ -212,6 +212,11 @@ input:focus {
   top: 10px;
 }
 
+#userSection {
+  display: flex;
+  align-items: center;
+}
+
 #createURLBtn {
   margin-left: auto;
   margin-right: auto;
@@ -237,6 +242,11 @@ input:focus {
 .infoSVG:hover + span {
   visibility: visible;
 }
+#StatisticAllContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
 
 .statisticParag {
   display: flex;
@@ -244,8 +254,22 @@ input:focus {
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: center;
+  overflow-wrap: anywhere;
 }
 
+#LoginContainer,
+#signupContainer {
+  transition: all 530ms ease-out;
+  -webkit-transition: all 530ms ease-out;
+  position: absolute;
+  width: 100%;
+}
+#LoginContainer {
+  left: 0%;
+}
+#signupContainer {
+  left: 100%;
+}
 #aboutDiv img {
   height: 3em;
   width: 3em;

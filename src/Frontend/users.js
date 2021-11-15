@@ -38,3 +38,12 @@ const loginToWebsite = async () => {
 
 document.getElementById("signupBtn").addEventListener("click", signupToWebsite);
 document.getElementById("loginBtn").addEventListener("click", loginToWebsite);
+
+document.getElementById("gotoSignupBtn").addEventListener("click", () => {
+  document.getElementById("LoginContainer").style.left = "-100%"
+  document.getElementById("signupContainer").style.left = "0%"
+});
+document.getElementById("gotoLoginBtn").addEventListener("click", () => {
+  document.getElementById("LoginContainer").style.left = "0%"
+  document.getElementById("signupContainer").style.left = "100%"
+})

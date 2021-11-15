@@ -27,7 +27,7 @@ const sendOldURLToServerWithNameOfNew = async () => {
   }
 }
 
-const getStatisticFromURL = async () => {
+const getURLStatisticFromURL = async () => {
   const userURLValue = document.getElementById("userCustomUrl").value;
   if (!validator.isLength(userURLValue, { min: 3, max: 15 })) {
     createErrorInputUI(document.getElementById("userCustomUrl"), "New Url Name Must be Minimum 3 and Maximum 15");
@@ -38,22 +38,45 @@ const getStatisticFromURL = async () => {
     return
   }
   try {
-    const response = await axios.get(`${Host}/api/statistic/${userURLValue}`);
+    const response = await axios.get(`${Host}/api/statistic/url/${userURLValue}`);
     const responseUrlOBJ = response.data;
     const divStatics = document.createElement("DIV");
     divStatics.classList.add("regularDiv");
     divStatics.innerHTML = `
   <h4>${userURLValue}</h4>
   <div class="statisticParag">
+  <p>Create By User : <span class="boldWord">${responseUrlOBJ.username}</span></p>
   <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate}</span></p>
   <p>Number of Entries to URL: <span class="boldWord">${responseUrlOBJ.redirectCount}</span></p>
   <p>Original URL: <a href="${responseUrlOBJ.originalUrl} target="_blank"><span class="boldWord">${responseUrlOBJ.originalUrl}</span></a></p>
   </div>
   `;
     clearBadInput()
-    document.getElementById("urlStaticSect").appendChild(divStatics);
+    document.getElementById("URLStatisticContainer").appendChild(divStatics);
   } catch (err) {
     createErrorInputUI(document.getElementById("userCustomUrl"), "Non Existing URL");
+  }
+}
+
+const getUserStatistic = async () => {
+  try {
+    const response = await axios.get(`${Host}/api/statistic/`);
+    const responseUrlOBJ = response.data;
+    for (let Urlobj of responseUrlOBJ) {
+      const divStatics = document.createElement("DIV");
+      divStatics.classList.add("regularDiv");
+      divStatics.innerHTML = `
+  <h4>${Urlobj.newUrl}</h4>
+  <div class="statisticParag">
+  <p>Special URL Created: <span class="boldWord">${Urlobj.creationDate}</span></p>
+  <p>Number of Entries to URL: <span class="boldWord">${Urlobj.redirectCount}</span></p>
+  <p>Original URL: <a href="${Urlobj.originalUrl} target="_blank"><span class="boldWord">${Urlobj.originalUrl}</span></a></p>
+  </div>
+  `;
+      document.getElementById("UserStatisticContainer").appendChild(divStatics);
+    }
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -79,7 +102,8 @@ const createErrorInputUI = (inputElement, msg) => {
 
 try {
   document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
-  document.getElementById("getStatsticBtn").addEventListener("click", getStatisticFromURL);
+  document.getElementById("getURLStatsticBtn").addEventListener("click", getURLStatisticFromURL);
+  document.getElementById("getUserStatsticBtn").addEventListener("click", getUserStatistic)
   document.getElementById("logoutBtn").addEventListener("click", () => {
     document.cookie = `token=;Max-Age=-99999999;`;
     location.reload();

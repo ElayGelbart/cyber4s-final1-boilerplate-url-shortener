@@ -65,7 +65,6 @@ function checkAuth(req, res, next) {
       return;
     }
     req.username = user.username;
-    console.log("user is ok");
     next();
   });
 }
