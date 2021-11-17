@@ -210,6 +210,12 @@ input:focus {
   top: 10px;
 }
 
+#signUpDiv img {
+  height: 2em;
+  position: relative;
+  top: 10px;
+}
+
 #userSection {
   display: flex;
   align-items: center;

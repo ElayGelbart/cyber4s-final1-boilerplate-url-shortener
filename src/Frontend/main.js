@@ -21,7 +21,11 @@ const sendOldURLToServerWithNameOfNew = async () => {
     const response = await axios.post(`${Host}/api/shorturl/${newURLvalue}`, { oldurl: oldURLvalue });
     const fullnewURL = `${Host}/${response.data}`;
     clearBadInput();
-    document.getElementById("newURLlink").innerHTML = `New URL Is Born : <a href="${fullnewURL}" target="_blank">${fullnewURL}</a>`
+    document.getElementById("newURLlink").innerHTML = `New URL Is Born : <a href="${fullnewURL}" id="newURLlink" target="_blank">${fullnewURL}</a><button class="regularBtn" id="copyBtn">Copy</button>`
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      navigator.clipboard.writeText(fullnewURL);
+    })
+
   } catch (err) {
     if (/400/.test(err)) {
       createErrorInputUI(document.getElementById("oldURLinput"), "DNS Check Failed");
@@ -111,8 +115,7 @@ try {
   document.getElementById("logoutBtn").addEventListener("click", () => {
     document.cookie = `token=;Max-Age=-99999999;`;
     location.reload();
-  })
-
+  });
 
 
 
