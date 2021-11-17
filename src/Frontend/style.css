@@ -49,9 +49,7 @@ header {
 }
 
 header img {
-  position: absolute;
-  left: 0px;
-  width: 350px;
+  width: auto;
 }
 
 header nav {
@@ -263,6 +261,9 @@ input:focus {
   -webkit-transition: all 530ms ease-out;
   position: absolute;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #LoginContainer {
   left: 0%;
