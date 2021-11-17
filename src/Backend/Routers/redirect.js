@@ -1,22 +1,22 @@
 const express = require("express");
 const UrlModel = require("../Models/URL");
 const router = express.Router();
+const axios = require("axios");
 
 router.get("/:wishUrl", async (req, res, next) => {
   try {
-    const ip = req.ip;
-    console.log(ip);
     const givenUrl = req.params.wishUrl;
     const urlObj = await UrlModel.find({ newUrl: givenUrl });
     if (!urlObj.length) {
       res.redirect('/error/404');
       return
     }
-    const upCount = urlObj[0].redirectCount + 1;
-    // async because its only counter and user not rely on response
 
-    const putResponse = UrlModel.updateMany({ newUrl: givenUrl }, { $set: { redirectCount: upCount } });
     res.redirect(urlObj[0].originalUrl);
+    // async because its only counter and user not rely on response
+    const userIP = req.ip;
+    const ipInfo = await axios.get(`http://ip-api.com/json/${userIP}`);
+    const putResponse = await UrlModel.updateMany({ newUrl: givenUrl }, { $inc: { redirectCount: 1 }, $push: { ipEntrys: ipInfo } });
     return;
 
   } catch (err) {

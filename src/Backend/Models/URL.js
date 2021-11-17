@@ -10,7 +10,8 @@ const URLScheme = mongoose.Schema({
   creationDate: Date,
   redirectCount: Number,
   originalUrl: String,
-  newUrl: String
+  newUrl: String,
+  ipEntrys: [Object]
 });
 
 module.exports = mongoose.model("URL", URLScheme);
