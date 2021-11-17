@@ -114,7 +114,7 @@ const returnStringMostCountryFromIParr = (ipARR) => {
   const countryARR = ipARR.map((ipobj) => {
     return ipobj.country
   });
-  return countryARR.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop();
+  return countryARR.sort((a, b) => countryARR.filter(v => v === a).length - countryARR.filter(v => v === b).length).pop();
 }
 
 try {
