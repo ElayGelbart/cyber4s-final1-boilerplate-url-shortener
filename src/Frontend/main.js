@@ -55,6 +55,7 @@ const getURLStatisticFromURL = async () => {
   <div class="statisticParag">
   <p>Create By User : <span class="boldWord">${responseUrlOBJ.username}</span></p>
   <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate.slice(0, 10)}</span></p>
+  <p>Most Visited From Country: <span class="boldWord">${returnStringMostCountryFromIParr(responseUrlOBJ.ipEntrys)}</span></p>
   <p>Unique Entries to URL: <span class="boldWord">${responseUrlOBJ.ipEntrys.length}</span></p>
   <p>Original URL: <a href="${responseUrlOBJ.originalUrl} target="_blank"><span class="boldWord">${responseUrlOBJ.originalUrl}</span></a></p>
   </div>
@@ -77,7 +78,7 @@ const getUserStatistic = async () => {
   <h4>${Urlobj.newUrl}</h4>
   <div class="statisticParag">
   <p>Special URL Created: <span class="boldWord">${Urlobj.creationDate.slice(0, 10)}</span></p>
-    <p>Most Visited From Country: <span class="boldWord">${returnStringMostCountryFromIParr(responseUrlOBJ.ipEntrys)}</span></p>
+  <p>Most Visited From Country: <span class="boldWord">${returnStringMostCountryFromIParr(responseUrlOBJ.ipEntrys)}</span></p>
   <p>Unique Entries to URL: <span class="boldWord">${Urlobj.redirectCount}</span></p>
   <p>Original URL: <a href="${Urlobj.originalUrl} target="_blank"><span class="boldWord">${Urlobj.originalUrl}</span></a></p>
   </div>
@@ -113,10 +114,7 @@ const returnStringMostCountryFromIParr = (ipARR) => {
   const countryARR = ipARR.map((ipobj) => {
     return ipobj.country
   });
-  return countryARR.sort((a, b) =>
-    arr.filter(v => v === a).length
-    - arr.filter(v => v === b).length
-  ).pop();
+  return countryARR.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop();
 }
 
 try {
