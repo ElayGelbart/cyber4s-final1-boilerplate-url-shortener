@@ -79,7 +79,7 @@ const getUserStatistic = async () => {
   <div class="statisticParag">
   <p>Special URL Created: <span class="boldWord">${Urlobj.creationDate.slice(0, 10)}</span></p>
   <p>Most Visited From Country: <span class="boldWord">${returnStringMostCountryFromIParr(Urlobj.ipEntrys)}</span></p>
-  <p>Unique Entries to URL: <span class="boldWord">${Urlobj.redirectCount}</span></p>
+  <p>Unique Entries to URL: <span class="boldWord">${Urlobj.ipEntrys.length}</span></p>
   <p>Original URL: <a href="${Urlobj.originalUrl} target="_blank"><span class="boldWord">${Urlobj.originalUrl}</span></a></p>
   </div>
   `;
