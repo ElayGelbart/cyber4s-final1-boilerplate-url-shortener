@@ -16,7 +16,7 @@ router.get("/:wishUrl", async (req, res, next) => {
     const userIP = req.ip;
     axios.get(`http://ip-api.com/json/${userIP}`).then((res) => {
       console.log(res);
-      const putResponse = UrlModel.updateOne({ newUrl: givenUrl }, { $inc: { redirectCount: 1 }, $addToSet: { ipEntrys: res } });
+      const putResponse = UrlModel.updateOne({ newUrl: givenUrl }, { $addToSet: { ipEntrys: res } });
     });
     res.redirect(urlObj[0].originalUrl);
     return;
