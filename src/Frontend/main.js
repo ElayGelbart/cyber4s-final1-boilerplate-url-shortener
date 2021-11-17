@@ -55,7 +55,7 @@ const getURLStatisticFromURL = async () => {
   <div class="statisticParag">
   <p>Create By User : <span class="boldWord">${responseUrlOBJ.username}</span></p>
   <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate.slice(0, 10)}</span></p>
-  <p>Unique Entries to URL: <span class="boldWord">${responseUrlOBJ.redirectCount}</span></p>
+  <p>Unique Entries to URL: <span class="boldWord">${responseUrlOBJ.ipEntrys.length}</span></p>
   <p>Original URL: <a href="${responseUrlOBJ.originalUrl} target="_blank"><span class="boldWord">${responseUrlOBJ.originalUrl}</span></a></p>
   </div>
   `;
@@ -106,6 +106,16 @@ const createErrorInputUI = (inputElement, msg) => {
   msgPara.classList.add("badInputPara")
   msgPara.innerText = `${msg}`
   inputElement.parentElement.appendChild(msgPara)
+}
+
+const returnStringMostCountryFromIParr = (ipARR) => {
+  const countryARR = ipARR.map((ipobj) => {
+    return ipobj.country
+  });
+  return countryARR.sort((a, b) =>
+    arr.filter(v => v === a).length
+    - arr.filter(v => v === b).length
+  ).pop();
 }
 
 try {
