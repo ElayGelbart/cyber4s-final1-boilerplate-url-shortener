@@ -4,6 +4,8 @@ const router = express.Router();
 
 router.get("/:wishUrl", async (req, res, next) => {
   try {
+    const ip = req.ip;
+    console.log(ip);
     const givenUrl = req.params.wishUrl;
     const urlObj = await UrlModel.find({ newUrl: givenUrl });
     if (!urlObj.length) {
