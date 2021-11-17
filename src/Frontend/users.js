@@ -19,6 +19,7 @@ const signupToWebsite = async () => {
   try {
     const response = await axios.post(`${Host}/users/signup`, { username: usernameValue, password: passwordValue });
     clearBadInput();
+    window.location.href = '/';
   } catch (err) {
     createErrorInputUI(document.getElementById("signupUsernameInput"), "Username Taken");
   }

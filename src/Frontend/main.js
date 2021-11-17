@@ -1,6 +1,6 @@
 'use strict'
 // const Host = `https://egshorturl.herokuapp.com` remember!;
-const Host = `http://localhost:8080`
+const Host = `http://localhost:8080` //For Local
 
 const sendOldURLToServerWithNameOfNew = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;
@@ -23,7 +23,11 @@ const sendOldURLToServerWithNameOfNew = async () => {
     clearBadInput();
     document.getElementById("newURLlink").innerHTML = `New URL Is Born : <a href="${fullnewURL}" target="_blank">${fullnewURL}</a>`
   } catch (err) {
-    createErrorInputUI(document.getElementById("newURLinput"), "URL is Taken");
+    if (/400/.test(err)) {
+      createErrorInputUI(document.getElementById("oldURLinput"), "DNS Check Failed");
+    } else {
+      createErrorInputUI(document.getElementById("newURLinput"), "URL is Taken");
+    }
   }
 }
 
@@ -46,8 +50,8 @@ const getURLStatisticFromURL = async () => {
   <h4>${userURLValue}</h4>
   <div class="statisticParag">
   <p>Create By User : <span class="boldWord">${responseUrlOBJ.username}</span></p>
-  <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate}</span></p>
-  <p>Number of Entries to URL: <span class="boldWord">${responseUrlOBJ.redirectCount}</span></p>
+  <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate.slice(0, 10)}</span></p>
+  <p>Unique Entries to URL: <span class="boldWord">${responseUrlOBJ.redirectCount}</span></p>
   <p>Original URL: <a href="${responseUrlOBJ.originalUrl} target="_blank"><span class="boldWord">${responseUrlOBJ.originalUrl}</span></a></p>
   </div>
   `;
@@ -68,8 +72,8 @@ const getUserStatistic = async () => {
       divStatics.innerHTML = `
   <h4>${Urlobj.newUrl}</h4>
   <div class="statisticParag">
-  <p>Special URL Created: <span class="boldWord">${Urlobj.creationDate}</span></p>
-  <p>Number of Entries to URL: <span class="boldWord">${Urlobj.redirectCount}</span></p>
+  <p>Special URL Created: <span class="boldWord">${Urlobj.creationDate.slice(0, 10)}</span></p>
+  <p>Unique Entries to URL: <span class="boldWord">${Urlobj.redirectCount}</span></p>
   <p>Original URL: <a href="${Urlobj.originalUrl} target="_blank"><span class="boldWord">${Urlobj.originalUrl}</span></a></p>
   </div>
   `;

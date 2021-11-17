@@ -10,8 +10,9 @@ router.get("/:wishUrl", async (req, res, next) => {
       res.redirect('/error/404');
       return
     }
-    const upCount = urlObj[0].redirectCount++;
+    const upCount = urlObj[0].redirectCount + 1;
     // async because its only counter and user not rely on response
+
     const putResponse = UrlModel.updateMany({ newUrl: givenUrl }, { $set: { redirectCount: upCount } });
     res.redirect(urlObj[0].originalUrl);
     return;

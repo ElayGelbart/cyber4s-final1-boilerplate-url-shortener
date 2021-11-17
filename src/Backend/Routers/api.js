@@ -39,12 +39,13 @@ router.post("/shorturl/:nameOfNewUrl", async (req, res, next) => {
       throw new Error(err);
     });
   } catch (err) {
-    next({ status: 400, msg: "Provide URL does not Working" });
+    next({ status: 400, msg: "DNS NOT FOUND" });
     return;
   }
+  const today = new Date()
   const UrlObj = {
     username: username,
-    creationDate: new Date().toISOString().substring(0, 10),
+    creationDate: today.toISOString().slice(0, 10),
     redirectCount: 1,
     originalUrl: oldURL,
     newUrl: newUrl
