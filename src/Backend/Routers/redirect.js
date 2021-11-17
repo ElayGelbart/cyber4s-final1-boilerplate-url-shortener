@@ -14,9 +14,9 @@ router.get("/:wishUrl", async (req, res, next) => {
 
     // async because its only counter and user not rely on response
     const userIP = req.ip;
-    axios.get(`http://ip-api.com/json/${userIP}`).then((res) => {
+    await axios.get(`http://ip-api.com/json/${userIP}`).then((res) => {
       const putResponse = UrlModel.updateOne({ newUrl: givenUrl }, { $addToSet: { ipEntrys: res } }).then((res) => {
-        console.log(res);
+        console.log(res, "lol");
       }
       )
     });
