@@ -12,13 +12,12 @@ router.get("/:wishUrl", async (req, res, next) => {
       return
     }
 
-    res.redirect(urlObj[0].originalUrl);
     // async because its only counter and user not rely on response
     const userIP = req.ip;
-    const ipInfo = await axios.get(`http://ip-api.com/json/${userIP}`);
-    console.log(ipInfo);
-    const putResponse = await UrlModel.updateOne({ newUrl: givenUrl }, { $inc: { redirectCount: 1 }, $push: { ipEntrys: ipInfo } });
-    res.send();
+    const ipInfo = axios.get(`http://ip-api.com/json/${userIP}`).then((res) => {
+      const putResponse = UrlModel.updateOne({ newUrl: givenUrl }, { $inc: { redirectCount: 1 }, $push: { ipEntrys: ipInfo } });
+    });
+    res.redirect(urlObj[0].originalUrl);
     return;
 
   } catch (err) {
