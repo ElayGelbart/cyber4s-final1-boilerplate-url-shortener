@@ -16,8 +16,9 @@ router.get("/:wishUrl", async (req, res, next) => {
     // async because its only counter and user not rely on response
     const userIP = req.ip;
     const ipInfo = await axios.get(`http://ip-api.com/json/${userIP}`);
+    console.log(ipInfo);
     const putResponse = await UrlModel.updateMany({ newUrl: givenUrl }, { $inc: { redirectCount: 1 }, $push: { ipEntrys: ipInfo } });
-    res.send()
+    res.send();
     return;
 
   } catch (err) {
