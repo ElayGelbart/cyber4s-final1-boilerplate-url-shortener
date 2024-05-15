@@ -1,77 +1,47 @@
-# ![Scale-Up Velocity](./readme-files/logo-main.png) Final 1 - URL shortner 📎
+# ![EGShortUrl](/Reademe-Assest/Logo.svg?raw=true) Final 1 - URL shortner 📎
 
-In this project you will create your own [URL shortener](https://en.wikipedia.org/wiki/URL_shortening)!
+Hello everybody, in this project i created a shoertner for Long URL, with use of mant technologies and functionallity.
+this website sit in Heroku servers, use JSONBINS as Databse and use Nodejs As runtime environment.
 
-This repository includes a basic template for starting the project:
+before reading try my website : [EGShortURL](https://egshorturl.herokuapp.com/)
 
-## Instructions
+## What can Customer Do In EG-Short-URL
 
-- Fork this repository to your account as a **public** repo
-- Clone your new repository to your computer 🖥
-- Install the project dependencies by running `npm install` from the vscode terminal `ctrl + j` (make sure you are in the correct directory) 📂
-- [Create a new branch](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/managing-branches) for the development process
-- Make changes to the code to meet the project requirements 📝
-- [Commit Early, Push Often](https://www.worklytics.co/commit-early-push-often/) - your work will be evaluated by your git flow and overall github usage 🏄‍♂️
-- Before submitting, create a pull request from the development branch into the main branch. **Leave the PR open and do not merge the branches**. The open PR will be used to review and mark your code
-- Good Luck! 🤘
+- Pick old URL and short it to New URL
+- Pick new URL name as Customer wants
+- Get Stats about new URL.
+- Get Readirect if type non exicting URL
+- Get info About Developer
 
-## Testing your project
+## What Special About my site
 
-In this assignment, you will have to create your own tests, as learned in class. Your grade will be calculated by your test coverage.
+- Custome Design with animation to catch Customer eye and keep him in the site, he will come back again.
+- Custom 404 Page for bad request in URLs.
+- Custome Page for mobile Users to get them best time in site, not just media query.
+- Server and Front Checks on URLs To detect User Faults on front to not overload Server and Checks on Server to "Bad" Users.
+- Simple Error "alerts" To The User.
+- Simple code, Made Sure is fine to read and not divided to many places, tried to keep code short as possible.
+- Use JSONBINS as DataBase.
+- Use Heroku(env) to keep my Keys Secret.
+- Use of SVG as Images on site, give me flexabillty to play with animations and color and sizes easily.
+- Didn't Use DB-Class.
+- Didn't Use Webpack.
 
-Optionally, You can create a github [action](https://docs.github.com/en/actions) that runs your tests on each commit:
+## Why I Didn't Use Webpack
 
-![Commits test](./readme-files/commit-tests.png)
+First Read [Why-Webpack](https://webpack.js.org/concepts/why-webpack/).
+Webpack main purpose is connect diffrent JS Files. this project has one Not Big js file who dont need to divide because it not long code
+and more understandable on his own. so in my opinion Bundle This files in project will only Damage the Readabillty.
 
-## Guidelines
+## Why i Didn't Use DB Class
 
-- Create a route `/api/shorturl/` in your `express` app that will handle all url shortening requests. (We recommend using [express Router](https://expressjs.com/en/guide/routing.html))
+class is not something who bring new functionallty, its bring only more convenient way to write code.
+in this DB Class, the class do create new Instance of new things, only function. and behave more like Modules.
+so in last, i didnt use class who give me something new and i can do better without.
 
-- Write/read **Asynchronously** a single JSON file as your DB
+## Technologies in EG-Short-URL :
 
-- [Serve](https://expressjs.com/en/starter/static-files.html) your client files from your server at route `/`
+![HtmlLogo](/Reademe-Assest/HTMLLOGO.svg?raw=true) ![CssLogo](/Reademe-Assest/CSSLOGO.svg?raw=true) ![JsLogo](/Reademe-Assest/JSLOGO.svg?raw=true)
+![AxiosLogo](/Reademe-Assest/AXIOSLOGO.svg?raw=true) ![NodeLogo](/Reademe-Assest/NODEJSLOGO.svg?raw=true) ![HerokuLogo](/Reademe-Assest/HEROKULOGO.svg?raw=true)
 
-- Style and change your front-end as you wish. You can take inspiration from this [example](https://www.shorturl.at/)
-
-## Requirements
-
-- Examine thoroughly and copy all functionality of [this](https://url-shortener-microservice.freecodecamp.rocks/) FCC example
-
-- Use a `class DataBase{}` to read/write (**Asynchronously**) all data in your back-end (you can use a json file as persistent layer)
-
-- Add another functionality to your service: a statistics route (`api/statistic/:shorturl-id`) that will respond with the following data per `shorturl-id`:
-  - `creationDate` - a SQLDate format
-  - `redirectCount` - the amount of times this url was used for redirection
-  - `originalUrl`
-  - `shorturl-id`
-
-- Fully test your `express` app with `jest` and `supertest`. Test each end point response **including** error responses.
-
-  Use a separate DB file for your tests. _Hint: use [Environment variables](https://jestjs.io/docs/en/environment-variables)_
-
-## Bonus
-
-- Add any feature you desire. Some ideas worth extra points:
-  - Custom short URL. Support optional `shorturl-id` parameter in your `POST` request. Pay attention to error handling.
-  - Serve a styled statistics dashboard instead of the default JSON statistics
-  - Use the [`JSONBIN.io`](https://jsonbin.io/) service bin as your persistent layer in your back-end DB class (use CRUD operations to read write bins)
-  - Try implementing user management
-- Use supertest/puppeteer test to test any bonus feature you implemented
-
-**Add an explanation in `README.md` for each bonus feature you add and a link to any resource you used**
-
-## Grading policy
-
-- Using jsonbin.io with/instead of writing to files
-- Correct DB class usage
-- Code quality and style: indentation, Meaningful and non-disambiguate variable names, Comments and documentation, file and directory structure
-- Visual creativity, style your front-end to make it look awesome 💅🏿
-- Division to reusable functions, no code duplication
-- Git usage: meaningful commit messages, small commits, folder and file structures, README file, issues, etc...
-
-## Submitting
-- Submit your solution repo link - an open PR from your dev branch to the main one
-- Your readme should have a [`repl.it`](https://repl.it/) link with your solutions.
-- Submit a link to your repo to the CRM.
-
-GOOD LUCK!
+### Thank You 4 Review my Website

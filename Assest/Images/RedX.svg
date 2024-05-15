@@ -1,0 +1,27 @@
+<svg xml:space="preserve" viewBox="0 0 100 100" y="0" x="0" xmlns="http://www.w3.org/2000/svg" id="圖層_1" version="1.1" style="height: 100%; width: 100%;" width="200px" height="200px"><g class="ldl-scale" style="transform-origin: 50% 50%; transform: rotate(0deg) scale(0.8, 0.8);"><g class="ldl-ani"><g class="ldl-layer"><g class="ldl-ani" style="transform-origin: 50px 50px; transform: rotate(0deg); animation: 3.44828s linear -2.29885s infinite normal forwards running smash-e020de82-f4a9-42d6-99e4-fbf7d1417972;"><path stroke-miterlimit="10" stroke-width="8" stroke="#333" fill="none" d="M45.7 10.2L17.6 26.4c-2.7 1.5-4.3 4.4-4.3 7.4v32.4c0 3.1 1.6 5.9 4.3 7.4l28.1 16.2c2.7 1.5 5.9 1.5 8.6 0l28.1-16.2c2.7-1.5 4.3-4.4 4.3-7.4V33.8c0-3.1-1.6-5.9-4.3-7.4L54.3 10.2c-2.7-1.6-5.9-1.6-8.6 0z" style="stroke: rgb(51, 51, 51);"></path></g></g><g class="ldl-layer"><g class="ldl-ani"><g><g class="ldl-layer"><g class="ldl-ani" style="transform-origin: 50px 50px; transform: rotate(0deg); animation: 3.44828s linear -2.87356s infinite normal forwards running smash-e020de82-f4a9-42d6-99e4-fbf7d1417972;"><path d="M25.3 45h49.5v10H25.3z" fill="#e15b64" transform="rotate(-44.996 49.997 49.997)" style="fill: rgb(225, 91, 100);"></path></g></g></g></g></g><g class="ldl-layer"><g class="ldl-ani"><g><g class="ldl-layer"><g class="ldl-ani" style="transform-origin: 50px 50px; transform: rotate(0deg); animation: 3.44828s linear -3.44828s infinite normal forwards running smash-e020de82-f4a9-42d6-99e4-fbf7d1417972;"><path d="M45 25.3h10v49.5H45z" fill="#e15b64" transform="rotate(-45.001 50 50)" style="fill: rgb(225, 91, 100);"></path></g></g></g></g></g></g></g>
+<style id="smash-e020de82-f4a9-42d6-99e4-fbf7d1417972" data-anikit="">@keyframes smash-e020de82-f4a9-42d6-99e4-fbf7d1417972
+{
+  0% {
+    animation-timing-function: cubic-bezier(0.3385,0.332,0.6667,0.6667);
+    transform: rotate(0deg);
+  }
+  40.8% {
+    animation-timing-function: cubic-bezier(0.3316,0.3338,0.5714,1.3045);
+    transform: rotate(24.48deg);
+  }
+  48.5% {
+    animation-timing-function: cubic-bezier(0.9673,0.2776,0.6667,0.6667);
+    transform: rotate(29.07deg);
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.1933,0.2947,-0.0572,0.7191);
+    transform: rotate(25.38deg);
+  }
+  60.8% {
+    animation-timing-function: cubic-bezier(0.0583,2.8507,0.8558,1);
+    transform: rotate(0.54deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}</style></svg>
